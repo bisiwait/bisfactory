@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BisFactory | Pattaya App Repository</title>
+    <meta name="description" content="PWA apps for the Pattaya community">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-card {
+            background: #0a0a0a;
+            border: 1px solid #1f2937;
+            transition: border-color 0.2s ease;
+        }
+        .glass-card:active {
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen max-w-md mx-auto px-5 pt-16 pb-24">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-black italic tracking-tighter mb-2">
+                BisFactory
+            </h1>
+            <div class="h-1 w-10 bg-blue-600 mx-auto mb-4"></div>
+            <p class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold">
+                App Repository / Jomtien
+            </p>
+        </header>
+
+        <!-- App Grid -->
+        <div class="grid gap-5">
+
+            <!-- Doubles Taisen -->
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Doubles Taisen</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
+                </div>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    スポーツの試合進行とスコア管理をリアルタイム同期。
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://doubles-taisen.vercel.app" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">
+                        Open App
+                    </a>
+                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
+                        PWA
+                    </button>
+                </div>
+            </section>
+
+            <!-- Pickleball Score -->
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Pickleball Score</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-yellow-900/30 text-yellow-400 border border-yellow-800">BETA</span>
+                </div>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    サーバー権とポジションを視覚化。正確なスコアリングに特化。
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://pb-score.vercel.app" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">
+                        Open App
+                    </a>
+                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
+                        PWA
+                    </button>
+                </div>
+            </section>
+
+            <!-- Pattaya Real Estate -->
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Pattaya Real Estate</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-red-900/30 text-red-400 border border-red-800">ALPHA</span>
+                </div>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    パタヤ・シラチャの物件とエージェント情報ポータル。
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://chonburihome.vercel.app" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">
+                        Open App
+                    </a>
+                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
+                        PWA
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 text-center">
+            <p class="text-[10px] text-gray-600 font-bold tracking-[0.4em] uppercase mb-1">Developed by BisFactory</p>
+            <p class="text-[9px] text-gray-800 font-medium">No login required. Ad-free. Local focus.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
