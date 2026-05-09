@@ -1,0 +1,15 @@
+{
+  "name": "Score Master",
+  "short_name": "ScoreMaster",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "../assets/icon.png",
+      "sizes": "1080x1080",
+      "type": "image/png"
+    }
+  ]
+}
