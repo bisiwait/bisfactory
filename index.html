@@ -6,6 +6,15 @@
     <title>BisFactory | Pattaya App Repository</title>
     <meta name="description" content="PWA apps for the Pattaya community">
     
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BisFactory">
+    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,7 +114,7 @@
                     <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
                         Android Download
                     </a>
-                    <a href="https://bisiwait.github.io/bisfactory/pb/" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
+                    <a href="https://bisiwait.github.io/bisfactory/pb/" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-ios" target="_blank">
                         iOS Download
                     </a>
                 </div>
@@ -142,8 +151,9 @@
                 descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
                 descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
                 descSports: "なんでも使えるシンプル得点アプリ。",
-                btnOpen: "Open Web",
+                btnOpen: "ウェブで開く",
                 btnApk: "Android版ダウンロード",
+                btnIos: "iOS版 (PWA)",
                 btnInstall: "インストール",
                 footer: "ログイン不要 ・ 広告なし ・ 地域密着"
             },
@@ -154,6 +164,7 @@
                 descSports: "A simple scoring app that can be used for anything.",
                 btnOpen: "Open Web",
                 btnApk: "Download for Android",
+                btnIos: "iOS Version (PWA)",
                 btnInstall: "Install",
                 footer: "No login required. Ad-free. Local focus."
             },
@@ -164,6 +175,7 @@
                 descSports: "Una app sencilla para llevar la puntuación de cualquier deporte.",
                 btnOpen: "Abrir Web",
                 btnApk: "Descargar Android",
+                btnIos: "Versión iOS (PWA)",
                 btnInstall: "Instalar",
                 footer: "Sin registro. Sin anuncios. Enfoque local."
             },
@@ -174,6 +186,7 @@
                 descSports: "แอปนับคะแนนที่เรียบง่ายสำหรับทุกประเภทกีฬา",
                 btnOpen: "เปิดเว็บ",
                 btnApk: "ดาวน์โหลด Android",
+                btnIos: "เวอร์ชัน iOS (PWA)",
                 btnInstall: "ติดตั้ง",
                 footer: "ไม่ต้องเข้าสู่ระบบ ・ ไม่มีโฆษณา ・ เน้นใช้งานในท้องถิ่น"
             },
@@ -184,6 +197,7 @@
                 descSports: "Простое приложение для подсчета очков в любом виде спорта.",
                 btnOpen: "Открыть веб-сайт",
                 btnApk: "Скачать для Android",
+                btnIos: "Версия для iOS (PWA)",
                 btnInstall: "Установить",
                 footer: "Без регистрации. Без рекламы. Локальный фокус."
             },
@@ -194,6 +208,7 @@
                 descSports: "Aplikasi pencatat skor sederhana untuk olahraga apa pun.",
                 btnOpen: "Buka Web",
                 btnApk: "Unduh Android",
+                btnIos: "Versi iOS (PWA)",
                 btnInstall: "Instal",
                 footer: "Tanpa login. Tanpa iklan. Fokus lokal."
             },
@@ -204,6 +219,7 @@
                 descSports: "Ứng dụng ghi điểm đơn giản cho mọi mục đích.",
                 btnOpen: "Mở Web",
                 btnApk: "Tải cho Android",
+                btnIos: "Bản iOS (PWA)",
                 btnInstall: "Cài đặt",
                 footer: "Không cần đăng nhập. Không quảng cáo. Tập trung nội bộ."
             }
@@ -221,6 +237,7 @@
 
             document.querySelectorAll('.btn-open').forEach(el => el.innerHTML = t.btnOpen);
             document.querySelectorAll('.btn-apk').forEach(el => el.innerHTML = t.btnApk);
+            document.querySelectorAll('.btn-ios').forEach(el => el.innerHTML = t.btnIos); // iOSボタンへの翻訳適用
             document.querySelectorAll('.btn-install').forEach(el => el.innerHTML = t.btnInstall);
 
             document.getElementById('lang-selector').value = lang;
