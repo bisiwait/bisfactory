@@ -6,13 +6,15 @@
     <title>BisFactory | Pattaya App Repository</title>
     <meta name="description" content="PWA apps for the Pattaya community">
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Noto Color Emoji', sans-serif;
             background-color: #000000;
             color: #ffffff;
             -webkit-tap-highlight-color: transparent;
@@ -22,95 +24,215 @@
             border: 1px solid #1f2937;
             transition: border-color 0.2s ease;
         }
-        .glass-card:active {
+        /* プルダウンのスタイル */
+        .lang-select {
+            appearance: none;
+            background-color: #111111;
+            border: 1px solid #1f2937;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 32px 6px 12px;
+            border-radius: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+        .lang-select:focus {
+            outline: none;
             border-color: #3b82f6;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="min-h-screen max-w-md mx-auto px-5 pt-16 pb-24">
+    <div class="min-h-screen max-w-md mx-auto px-5 pt-12 pb-24">
         
-        <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-5xl font-black italic tracking-tighter mb-2">
-                BisFactory
-            </h1>
-            <div class="h-1 w-10 bg-blue-600 mx-auto mb-4"></div>
-            <p class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold">
-                App Repository
-            </p>
+        <header class="flex justify-between items-end mb-12">
+            <div>
+                <h1 class="text-5xl font-black italic tracking-tighter">
+                    BisFactory
+                </h1>
+                <div class="h-1 w-10 bg-blue-600 mt-2"></div>
+            </div>
+            
+            <div class="flex flex-col items-end gap-2">
+                <span class="text-[9px] font-black uppercase tracking-widest text-blue-500">Language</span>
+                <select onchange="setLanguage(this.value)" id="lang-selector" class="lang-select font-emoji">
+                    <option value="ja">🇯🇵 JP</option>
+                    <option value="en">🇺🇸 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="th">🇹🇭 TH</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="id">🇮🇩 ID</option>
+                    <option value="vi">🇻🇳 VI</option>
+                </select>
+            </div>
         </header>
 
-        <!-- App Grid -->
+        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-10 text-center">
+            App Repository
+        </p>
+
         <div class="grid gap-5">
 
-            <!-- Doubles Taisen -->
             <section class="glass-card rounded-3xl p-6">
                 <div class="flex justify-between items-start mb-2">
                     <h2 class="text-xl font-bold tracking-tight">Doubles Taisen</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                <p id="desc-doubles" class="text-sm text-gray-400 mb-6 leading-relaxed">
                     ダブルスゲームでの平等な組合せアプリ。
                 </p>
                 <div class="flex gap-3">
-                    <a href="https://doubles-taisen.web.app" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform" target=”_blank”>
+                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-open">
                         Open Web
                     </a>
-                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
-                        PWA
-                    </button>
                 </div>
             </section>
 
-            <!-- Pickleball Score -->
             <section class="glass-card rounded-3xl p-6">
                 <div class="flex justify-between items-start mb-2">
                     <h2 class="text-xl font-bold tracking-tight">Pickleball Score</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-yellow-900/30 text-yellow-400 border border-yellow-800">BETA</span>
                 </div>
-                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                <p id="desc-pickle" class="text-sm text-gray-400 mb-6 leading-relaxed">
                     サーバー権とポジションを視覚化。正確なスコアリングに特化。
                 </p>
                 <div class="flex gap-3">
-                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">
-                        Android版<br>ダウンロード
+                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-apk">
+                        Android Download
                     </a>
-                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
-                        PWA
-                    </button>
                 </div>
             </section>
 
-            <!-- Sports Score -->
             <section class="glass-card rounded-3xl p-6">
                 <div class="flex justify-between items-start mb-2">
                     <h2 class="text-xl font-bold tracking-tight">Sports Score</h2>
-                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-red-900/30 text-red-400 border border-red-800">ALPHA</span>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                <p id="desc-sports" class="text-sm text-gray-400 mb-6 leading-relaxed">
                     なんでも使えるシンプル得点アプリ。
                 </p>
                 <div class="flex gap-3">
-                    <a href="https://sports-score-theta.vercel.app/install" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform" target=”_blank” rel="noopener noreferrer">
-                        Open Web
+                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-install">
+                        Install
                     </a>
-                    <button onclick="alert('ブラウザメニューからホーム画面に追加してください')" class="flex-1 bg-gray-900 text-gray-300 py-3.5 rounded-2xl text-xs font-bold border border-gray-800 active:scale-[0.97] transition-transform">
-                        PWA
-                    </button>
                 </div>
             </section>
 
         </div>
 
-        <!-- Footer -->
         <footer class="mt-20 text-center">
             <p class="text-[10px] text-gray-600 font-bold tracking-[0.4em] uppercase mb-1">Developed by BisFactory</p>
-            <p class="text-[9px] text-gray-800 font-medium">No login required. Ad-free. Local focus.</p>
+            <p id="footer-text" class="text-[9px] text-gray-800 font-medium">No login required. Ad-free. Local focus.</p>
         </footer>
 
     </div>
 
+    <script>
+        const translations = {
+            ja: {
+                subHeader: "App Repository",
+                descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
+                descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
+                descSports: "なんでも使えるシンプル得点アプリ。",
+                btnOpen: "Open Web",
+                btnApk: "Android版ダウンロード",
+                btnInstall: "インストール",
+                footer: "ログイン不要 ・ 広告なし ・ 地域密着"
+            },
+            en: {
+                subHeader: "App Repository",
+                descDoubles: "Fair matching app for doubles games.",
+                descPickle: "Visualize serving rights and positions. Specialized for accurate scoring.",
+                descSports: "A simple scoring app that can be used for anything.",
+                btnOpen: "Open Web",
+                btnApk: "Download for Android",
+                btnInstall: "Install",
+                footer: "No login required. Ad-free. Local focus."
+            },
+            es: {
+                subHeader: "Repositorio de Apps",
+                descDoubles: "App de emparejamiento justo para juegos de dobles.",
+                descPickle: "Visualiza turnos de saque y posiciones. Especializada en puntuación precisa.",
+                descSports: "Una app sencilla para llevar la puntuación de cualquier deporte.",
+                btnOpen: "Abrir Web",
+                btnApk: "Descargar Android",
+                btnInstall: "Instalar",
+                footer: "Sin registro. Sin anuncios. Enfoque local."
+            },
+            th: {
+                subHeader: "คลังแอปพลิเคชัน",
+                descDoubles: "แอปจัดทีมที่ยุติธรรมสำหรับเกมประเภทคู่",
+                descPickle: "แสดงสิทธิ์การเสิร์ฟและตำแหน่งผู้เล่น เน้นการนับคะแนนที่แม่นยำ",
+                descSports: "แอปนับคะแนนที่เรียบง่ายสำหรับทุกประเภทกีฬา",
+                btnOpen: "เปิดเว็บ",
+                btnApk: "ดาวน์โหลด Android",
+                btnInstall: "ติดตั้ง",
+                footer: "ไม่ต้องเข้าสู่ระบบ ・ ไม่มีโฆษณา ・ เน้นใช้งานในท้องถิ่น"
+            },
+            ru: {
+                subHeader: "Репозиторий приложений",
+                descDoubles: "Приложение для честного подбора пар в парных играх.",
+                descPickle: "Визуализация права подачи и позиций. Создано для точного подсчета очков.",
+                descSports: "Простое приложение для подсчета очков в любом виде спорта.",
+                btnOpen: "Открыть веб-сайт",
+                btnApk: "Скачать для Android",
+                btnInstall: "Установить",
+                footer: "Без регистрации. Без рекламы. Локальный фокус."
+            },
+            id: {
+                subHeader: "Repositori Aplikasi",
+                descDoubles: "Aplikasi pemasangan tim yang adil untuk permainan ganda.",
+                descPickle: "Visualisasikan hak servis dan posisi. Khusus untuk skor yang akurat.",
+                descSports: "Aplikasi pencatat skor sederhana untuk olahraga apa pun.",
+                btnOpen: "Buka Web",
+                btnApk: "Unduh Android",
+                btnInstall: "Instal",
+                footer: "Tanpa login. Tanpa iklan. Fokus lokal."
+            },
+            vi: {
+                subHeader: "Kho ứng dụng",
+                descDoubles: "Ứng dụng ghép cặp công bằng cho các trận đấu đôi.",
+                descPickle: "Trực quan hóa quyền giao bóng và vị trí. Chuyên dụng để ghi điểm chính xác.",
+                descSports: "Ứng dụng ghi điểm đơn giản cho mọi mục đích.",
+                btnOpen: "Mở Web",
+                btnApk: "Tải cho Android",
+                btnInstall: "Cài đặt",
+                footer: "Không cần đăng nhập. Không quảng cáo. Tập trung nội bộ."
+            }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            if(!t) return;
+
+            // テキスト更新
+            document.getElementById('sub-header').innerText = t.subHeader;
+            document.getElementById('desc-doubles').innerText = t.descDoubles;
+            document.getElementById('desc-pickle').innerText = t.descPickle;
+            document.getElementById('desc-sports').innerText = t.descSports;
+            document.getElementById('footer-text').innerText = t.footer;
+
+            document.querySelectorAll('.btn-open').forEach(el => el.innerHTML = t.btnOpen);
+            document.querySelectorAll('.btn-apk').forEach(el => el.innerHTML = t.btnApk);
+            document.querySelectorAll('.btn-install').forEach(el => el.innerHTML = t.btnInstall);
+
+            // セレクトボックスの値を同期
+            document.getElementById('lang-selector').value = lang;
+
+            document.documentElement.lang = lang;
+        }
+
+        // 初期ロード時
+        window.addEventListener('DOMContentLoaded', () => {
+            const browserLang = navigator.language.split('-')[0];
+            const defaultLang = translations[browserLang] ? browserLang : 'en';
+            setLanguage(defaultLang);
+        });
+    </script>
 </body>
 </html>
