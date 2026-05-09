@@ -30,15 +30,16 @@
             background-color: #111111;
             border: 1px solid #1f2937;
             color: #ffffff;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
-            padding: 6px 32px 6px 12px;
-            border-radius: 12px;
+            padding: 8px 36px 8px 14px;
+            border-radius: 14px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 8px center;
-            background-size: 16px;
+            background-position: right 10px center;
+            background-size: 18px;
             cursor: pointer;
+            transition: border-color 0.2s ease;
         }
         .lang-select:focus {
             outline: none;
@@ -50,17 +51,16 @@
 
     <div class="min-h-screen max-w-md mx-auto px-5 pt-12 pb-24">
         
-        <header class="flex justify-between items-end mb-12">
-            <div>
-                <h1 class="text-5xl font-black italic tracking-tighter">
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex-shrink">
+                <h1 class="text-4xl font-black italic tracking-tighter">
                     BisFactory
                 </h1>
-                <div class="h-1 w-10 bg-blue-600 mt-2"></div>
+                <div class="h-1 w-8 bg-blue-600 mt-1"></div>
             </div>
             
-            <div class="flex flex-col items-end gap-2">
-                <span class="text-[9px] font-black uppercase tracking-widest text-blue-500">Language</span>
-                <select onchange="setLanguage(this.value)" id="lang-selector" class="lang-select font-emoji">
+            <div class="flex-shrink-0">
+                <select onchange="setLanguage(this.value)" id="lang-selector" class="lang-select">
                     <option value="ja">🇯🇵 JP</option>
                     <option value="en">🇺🇸 EN</option>
                     <option value="es">🇪🇸 ES</option>
@@ -72,7 +72,7 @@
             </div>
         </header>
 
-        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-10 text-center">
+        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-12">
             App Repository
         </p>
 
@@ -87,7 +87,7 @@
                     ダブルスゲームでの平等な組合せアプリ。
                 </p>
                 <div class="flex gap-3">
-                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-open">
+                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">
                         Open Web
                     </a>
                 </div>
@@ -102,7 +102,7 @@
                     サーバー権とポジションを視覚化。正確なスコアリングに特化。
                 </p>
                 <div class="flex gap-3">
-                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-apk">
+                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
                         Android Download
                     </a>
                 </div>
@@ -117,7 +117,7 @@
                     なんでも使えるシンプル得点アプリ。
                 </p>
                 <div class="flex gap-3">
-                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black btn-install">
+                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">
                         Install
                     </a>
                 </div>
@@ -210,7 +210,6 @@
             const t = translations[lang];
             if(!t) return;
 
-            // テキスト更新
             document.getElementById('sub-header').innerText = t.subHeader;
             document.getElementById('desc-doubles').innerText = t.descDoubles;
             document.getElementById('desc-pickle').innerText = t.descPickle;
@@ -221,13 +220,10 @@
             document.querySelectorAll('.btn-apk').forEach(el => el.innerHTML = t.btnApk);
             document.querySelectorAll('.btn-install').forEach(el => el.innerHTML = t.btnInstall);
 
-            // セレクトボックスの値を同期
             document.getElementById('lang-selector').value = lang;
-
             document.documentElement.lang = lang;
         }
 
-        // 初期ロード時
         window.addEventListener('DOMContentLoaded', () => {
             const browserLang = navigator.language.split('-')[0];
             const defaultLang = translations[browserLang] ? browserLang : 'en';
