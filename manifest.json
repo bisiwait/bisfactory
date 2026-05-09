@@ -7,7 +7,7 @@
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "assets/pickleball-score-icon-1080.png",
+      "src": "assets/icon.png",
       "sizes": "1080x1080",
       "type": "image/png"
     }
