@@ -2,435 +2,236 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Pickleball Score</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BisFactory | Pattaya App Repository</title>
+    <meta name="description" content="PWA apps for the Pattaya community">
     
-    <link rel="manifest" href="manifest.json">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Score Master">
-	<link rel="apple-touch-icon" href="assets/icon.png">
-	<link rel="icon" type="image/png" href="assets/icon.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1684143650036627"
-     crossorigin="anonymous"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            background-color: #f8fafc;
-            height: 100dvh; width: 100vw;
-            overflow: hidden; touch-action: manipulation;
-            -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+            font-family: 'Inter', 'Noto Color Emoji', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
         }
-        .app-shell { display: flex; flex-direction: column; height: 100%; width: 100%; max-width: 500px; margin: 0 auto; background-color: white; position: relative; }
-        header { background-color: #0f172a; color: white; padding: 0.5rem 0.75rem 0.75rem; flex-shrink: 0; text-align: center; }
-        main { flex-grow: 1; background-color: #f1f5f9; display: flex; flex-direction: column; justify-content: center; padding: 0.2rem 0.5rem; overflow: hidden; }
-        
-        .court-container {
-            width: 100%; margin: 0.1rem auto; position: relative; background-color: #1c7dbe; 
-            border: 3px solid white; border-radius: 4px; overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;
+        .glass-card {
+            background: #0a0a0a;
+            border: 1px solid #1f2937;
+            transition: border-color 0.2s ease;
         }
-
-        .v-mode-active .court-container {
-            max-width: 290px; aspect-ratio: 9/15;
-            background-image: linear-gradient(to right, white 2px, transparent 2px), linear-gradient(to right, white 2px, transparent 2px);
-            background-position: 50% 0%, 50% 100%; background-size: 2px 38%, 2px 38%; background-repeat: no-repeat;
+        /* プルダウンのスタイル */
+        .lang-select {
+            appearance: none;
+            background-color: #111111;
+            border: 1px solid #1f2937;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 36px 8px 14px;
+            border-radius: 14px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 18px;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
         }
-        
-        .h-mode-active .court-container {
-            max-width: 100%; aspect-ratio: 20/9;
-            background-image: linear-gradient(to bottom, white 2px, transparent 2px), linear-gradient(to bottom, white 2px, transparent 2px);
-            background-position: 0% 50%, 100% 50%; background-size: 35% 2px, 35% 2px; background-repeat: no-repeat;
+        .lang-select:focus {
+            outline: none;
+            border-color: #3b82f6;
         }
-
-        .court-net { position: absolute; background: rgba(255, 255, 255, 0.9); z-index: 40; pointer-events: none; }
-        .v-mode-active .court-net { top: 50%; left: 0; width: 100%; height: 4px; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; transform: translateY(-50%); }
-        .h-mode-active .court-net { left: 50%; top: 0; height: 100%; width: 4px; border-left: 1px solid #1e293b; border-right: 1px solid #1e293b; transform: translateX(-50%); }
-
-        .kitchen-area { position: absolute; background-color: #10b981; z-index: 5; pointer-events: none; }
-        .v-mode-active .kitchen-area { width: 100%; height: 13%; border-bottom: 2px solid white; border-top: 2px solid white; }
-        .v-mode-active .kitchen-top { top: 37%; border-top: none; }
-        .v-mode-active .kitchen-bottom { bottom: 37%; border-bottom: none; }
-        .h-mode-active .kitchen-area { height: 100%; width: 15%; border-left: 2px solid white; border-right: 2px solid white; }
-        .h-mode-active .kitchen-left { left: 35%; border-left: none; }
-        .h-mode-active .kitchen-right { right: 35%; border-right: none; }
-
-        .service-area-container { position: absolute; display: grid; z-index: 50; }
-        .v-mode-active .service-area-container { width: 100%; height: 37%; grid-template-columns: 1fr 1fr; }
-        .v-mode-active .top-team-area { top: 0; }
-        .v-mode-active .bottom-team-area { bottom: 0; }
-        .h-mode-active .service-area-container { height: 100%; width: 35%; grid-template-rows: 1fr 1fr; }
-        .h-mode-active .left-team-area { left: 0; }
-        .h-mode-active .right-team-area { right: 0; }
-
-        .player-box {
-            display: flex; flex-direction: row; align-items: center; justify-content: center;
-            gap: 4px; font-weight: 900; color: rgba(255, 255, 255, 0.85);
-            position: relative; text-align: center; transition: all 0.2s ease;
-            cursor: pointer; background-color: transparent; border: 3px solid transparent;
-        }
-        .v-mode-active .player-box { font-size: 0.9rem; }
-        .h-mode-active .player-box { font-size: 0.8rem; }
-        
-        .active-server { background-color: #025e9c; color: white; z-index: 60; border-color: #ef4444; box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2); }
-        .active-server::after { content: "🎾"; font-size: 1.1rem; display: inline-block; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
-
-        .win-overlay {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 4rem; font-weight: 900; color: #ef4444; 
-            text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
-            pointer-events: none; z-index: 100; letter-spacing: -0.05em;
-            animation: win-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes win-pop { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
-        
-        .h-mode-labels { display: none; width: 100%; justify-content: space-between; align-items: center; padding: 0 15%; margin-bottom: 4px; }
-        .h-mode-active .h-mode-labels { display: flex; }
-        .team-label-h { font-size: 11px; font-weight: 900; color: #334155; text-transform: uppercase; display: flex; align-items: center; background: rgba(255, 255, 255, 0.7); padding: 2px 10px; border-radius: 4px; }
-
-        footer { padding: 0.4rem 0.75rem 0.5rem; background: white; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
-        .ad-banner { width: 100%; height: 50px; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 10px; font-weight: bold; border-top: 1px solid #cbd5e1; }
-        .serve-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; margin-left: 6px; border: 1px solid rgba(0,0,0,0.05); }
-        .serve-dot.active { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
-        
-        button { transition: transform 0.1s, background-color 0.2s; }
-        button:active:not(:disabled) { transform: scale(0.92); }
-        #btn-point:active:not(:disabled) { background-color: #34d399; } 
-        #btn-fault:active:not(:disabled) { background-color: #fb7185; } 
-
-        .modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 100; display: none; flex-direction: column; padding: 1rem; }
-        button:disabled { opacity: 0.3; grayscale: 100%; cursor: not-allowed; transform: none !important; }
-        
-        .reset-standout { background-color: #f97316 !important; color: white !important; border-color: #ea580c !important; }
-        .reset-confirm { animation: pulse-warn 0.8s infinite; }
-        @keyframes pulse-warn { 0%, 100% { background-color: #fee2e2; color: #ef4444; } 50% { background-color: #ef4444; color: white; } }
     </style>
 </head>
-<body class="v-mode-active">
+<body class="antialiased">
 
-    <div class="app-shell">
-        <header class="shadow-lg">
-            <div class="flex justify-between items-center h-8 mb-2">
-                <div class="w-10"></div>
-                <div class="flex items-center gap-2">
-                    <span class="text-sm font-black text-yellow-500 uppercase tracking-tight" id="game-status">START</span>
-                    <span id="target-points-display" class="text-[11px] font-bold text-slate-400"></span>
-                </div>
-                <button id="btn-settings" class="text-slate-400 p-1 text-xl">⚙️</button>
-            </div>
-            <div class="text-7xl font-black tabular-nums tracking-tighter leading-none" id="display-score">0-0-2</div>
-        </header>
-
-        <main id="main-content">
-            <div class="h-mode-labels">
-                <div class="team-label-h"><span data-i18n="team_b">TEAM B</span> <span id="dot-B-h" class="serve-dot"></span></div>
-                <div class="team-label-h"><span data-i18n="team_a">TEAM A</span> <span id="dot-A-h" class="serve-dot"></span></div>
-            </div>
-
-            <div class="flex items-center justify-center text-[10px] font-extrabold text-slate-500 mb-1 uppercase" id="label-team-b-outer">
-                <span data-i18n="team_b">TEAM B</span> <span id="dot-B-v" class="serve-dot"></span>
+    <div class="min-h-screen max-w-md mx-auto px-5 pt-12 pb-24">
+        
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex-shrink">
+                <h1 class="text-4xl font-black italic tracking-tighter">
+                    BisFactory
+                </h1>
+                <div class="h-1 w-8 bg-blue-600 mt-1"></div>
             </div>
             
-            <div id="court-root" class="court-container">
-                <div class="court-net"></div>
-                <div class="kitchen-area kitchen-top kitchen-left"></div>
-                <div class="kitchen-area kitchen-bottom kitchen-right"></div>
-                
-                <div id="area-b" class="service-area-container top-team-area left-team-area">
-                    <div id="p-B-L" class="player-box" data-player-id="p-B-L"></div>
-                    <div id="p-B-R" class="player-box" data-player-id="p-B-R"></div>
+            <div class="flex-shrink-0">
+                <select onchange="setLanguage(this.value)" id="lang-selector" class="lang-select">
+                    <option value="ja">🇯🇵 JP</option>
+                    <option value="en">🇺🇸 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="th">🇹🇭 TH</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="id">🇮🇩 ID</option>
+                    <option value="vi">🇻🇳 VI</option>
+                </select>
+            </div>
+        </header>
+
+        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-12">
+            App Repository
+        </p>
+
+        <div class="grid gap-5">
+
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Doubles Taisen</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-
-                <div id="area-a" class="service-area-container bottom-team-area right-team-area">
-                    <div id="p-A-L" class="player-box" data-player-id="p-A-L"></div>
-                    <div id="p-A-R" class="player-box" data-player-id="p-A-R"></div>
+                <p id="desc-doubles" class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    ダブルスゲームでの平等な組合せアプリ。
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">
+                        Open Web
+                    </a>
                 </div>
-            </div>
+            </section>
 
-            <div class="flex items-center justify-center text-[10px] font-extrabold text-slate-500 mt-1 uppercase" id="label-team-a-outer">
-                <span data-i18n="team_a">TEAM A</span> <span id="dot-A-v" class="serve-dot"></span>
-            </div>
-        </main>
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Pickleball Score</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-yellow-900/30 text-yellow-400 border border-yellow-800">BETA</span>
+                </div>
+                <p id="desc-pickle" class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    サーバー権とポジションを視覚化。正確なスコアリングに特化。
+                </p>
+                <div class="flex gap-3">
+                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
+                        Android Download
+                    </a>
+                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
+                        Android Download
+                    </a>
+                </div>
+            </section>
 
-        <footer>
-            <div class="grid grid-cols-2 gap-2">
-                <button id="btn-point" class="bg-emerald-500 text-white font-black py-7 rounded-xl text-2xl shadow-lg shadow-emerald-100 flex items-center justify-center gap-2">
-                    <span data-i18n="point">POINT</span>
-                </button>
-                <button id="btn-fault" class="bg-rose-500 text-white font-bold py-7 rounded-xl text-2xl shadow-lg shadow-rose-100 flex items-center justify-center gap-2">
-                    <span data-i18n="fault">FAULT</span>
-                </button>
-                
-                <button id="btn-undo" class="bg-slate-100 text-slate-600 font-bold py-3 rounded-xl text-xs border border-slate-200 disabled:opacity-20">← <span data-i18n="undo">UNDO</span></button>
-                <button id="btn-toggle-serve" class="bg-sky-100 text-sky-700 font-bold py-3 rounded-xl text-xs border border-sky-200 transition-all"><span data-i18n="start_team">SERVE RIGHT</span></button>
-                <button id="btn-reset" class="col-span-2 bg-white text-slate-300 font-bold py-2 rounded-xl text-[10px] border border-slate-200 mt-0 transition-all duration-300"><span data-i18n="reset">RESET</span></button>
-            </div>
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Sports Score</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
+                </div>
+                <p id="desc-sports" class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    なんでも使えるシンプル得点アプリ。
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">
+                        Install
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="mt-20 text-center">
+            <p class="text-[10px] text-gray-600 font-bold tracking-[0.4em] uppercase mb-1">Developed by BisFactory</p>
+            <p id="footer-text" class="text-[9px] text-gray-800 font-medium">No login required. Ad-free. Local focus.</p>
         </footer>
 
-        <div class="ad-banner"><span class="text-[8px] text-slate-400">ADVERTISING AREA</span></div>
-
-        <div id="settings-modal" class="modal">
-            <div class="flex justify-between items-center border-bottom pb-2 mb-4">
-                <h2 class="font-black text-xl" data-i18n="settings">SETTINGS</h2>
-                <button id="btn-close-settings" class="text-2xl">✕</button>
-            </div>
-            <div class="overflow-y-auto flex-grow space-y-6">
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="language">LANGUAGE</label>
-                    <select id="lang-select" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                        <option value="ja">日本語 (Japanese)</option>
-                        <option value="en">English (English)</option>
-                        <option value="es">Español (Spanish)</option>
-                        <option value="vi">Tiếng Việt (Vietnamese)</option>
-                        <option value="th">ไทย (Thai)</option>
-                        <option value="ru">Русский (Russian)</option>
-                    </select>
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="orientation">ORIENTATION</label>
-                    <select id="orient-select" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                        <option value="vertical" data-i18n="vertical">VERTICAL</option>
-                        <option value="horizontal" data-i18n="horizontal">HORIZONTAL</option>
-                    </select>
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="winning_points">WINNING POINTS</label>
-                    <input type="number" id="winning-points-input" min="1" max="99" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="win_condition">WIN CONDITION</label>
-                    <select id="win-cond-select" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                        <option value="deuce" data-i18n="rule_deuce">Standard (Win by 2)</option>
-                        <option value="sudden" data-i18n="rule_sudden">Sudden Death (First to reach)</option>
-                    </select>
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="scoring_system">SCORING SYSTEM</label>
-                    <select id="scoring-select" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                        <option value="sideout" data-i18n="system_sideout">Side Out (Standard)</option>
-                        <option value="rally" data-i18n="system_rally">Rally Point</option>
-                    </select>
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="reset_names_label">ON RESET</label>
-                    <select id="reset-names-select" class="w-full p-3 bg-slate-100 rounded-xl font-bold">
-                        <option value="keep" data-i18n="names_keep">Keep Names</option>
-                        <option value="reset" data-i18n="names_reset">Reset Names</option>
-                    </select>
-                </section>
-                <section>
-                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2" data-i18n="player_names">PLAYER NAMES</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="text" id="name-A1" placeholder="A-1" class="p-2 bg-slate-50 border rounded-lg text-sm">
-                        <input type="text" id="name-A2" placeholder="A-2" class="p-2 bg-slate-50 border rounded-lg text-sm">
-                        <input type="text" id="name-B1" placeholder="B-1" class="p-2 bg-slate-50 border rounded-lg text-sm">
-                        <input type="text" id="name-B2" placeholder="B-2" class="p-2 bg-slate-50 border rounded-lg text-sm">
-                    </div>
-                </section>
-                <div class="text-[10px] text-slate-400 text-center mt-10">Pickleball Score v1.0</div>
-            </div>
-            <button id="btn-save-settings" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl mt-4"><span data-i18n="save">SAVE & CLOSE</span></button>
-        </div>
     </div>
 
     <script>
-        const i18n = {
-            ja: { current_score: "現在のスコア", start: "試合開始", in_play: "試合中", team_a: "チーム A", team_b: "チーム B", point: "得点", fault: "ミス", start_team: "サーブ権", undo: "戻る", reset: "リセット", settings: "設定", language: "言語", orientation: "コートの向き", vertical: "縦向き", horizontal: "横向き (審判視点)", player_names: "選手名登録", winning_points: "勝利ポイント", save: "保存して閉じる", winner: "勝利", confirm_reset: "リセットします", win_condition: "勝利条件", rule_deuce: "2点差で勝利 (標準)", rule_sudden: "先に到達で勝利", scoring_system: "得点方式", system_sideout: "サイドアウト制 (標準)", system_rally: "ラリーポイント制", reset_names_label: "リセット時の動作", names_keep: "選手名を保持する", names_reset: "選手名もリセット" },
-            en: { current_score: "CURRENT SCORE", start: "START", in_play: "IN PLAY", team_a: "TEAM A", team_b: "TEAM B", point: "POINT", fault: "FAULT", start_team: "SERVE POSS.", undo: "UNDO", reset: "RESET", settings: "SETTINGS", language: "LANGUAGE", orientation: "ORIENTATION", vertical: "VERTICAL", horizontal: "HORIZONTAL", player_names: "PLAYER NAMES", winning_points: "WIN POINTS", save: "SAVE", winner: "WINNER", confirm_reset: "RESETTING", win_condition: "WIN CONDITION", rule_deuce: "Win by 2 (Standard)", rule_sudden: "First to reach", scoring_system: "SCORING SYSTEM", system_sideout: "Side Out", system_rally: "Rally Point", reset_names_label: "ON RESET", names_keep: "Keep Names", names_reset: "Reset Names" },
-            es: { current_score: "PUNTUACIÓN", start: "INICIO", in_play: "EN JUEGO", team_a: "EQUIPO A", team_b: "EQUIPO B", point: "PUNTO", fault: "FALTA", start_team: "POSESIÓN", undo: "UNDO", reset: "RESETEAR", settings: "AJUSTES", language: "IDIOMA", orientation: "ORIENTACIÓN", vertical: "VERTICAL", horizontal: "HORIZONTAL", player_names: "NOMBRES", winning_points: "PUNTOS", save: "GUARDAR", winner: "GANADOR", confirm_reset: "RESETEANDO", win_condition: "CONDICIÓN", rule_deuce: "Diferencia de 2", rule_sudden: "Muerte súbita", scoring_system: "SISTEMA", system_sideout: "Side Out", system_rally: "Punto de Rally", reset_names_label: "AL RESETEAR", names_keep: "Mantener", names_reset: "Reset" },
-            vi: { current_score: "TỈ SỐ HIỆN TẠI", start: "BẮT ĐẦU", in_play: "ĐANG CHƠI", team_a: "ĐỘイ A", team_b: "ĐỘイ B", point: "ĐIỂM", fault: "LỖI", start_team: "QUYỀN GIAO", undo: "HOÀN TÁC", reset: "ĐẶТ LẠ L", settings: "CÀI ĐẶТ", language: "NGÔN NGỮ", orientation: "HƯỚNG SÂN", vertical: "DỌC", horizontal: "NGANG", player_names: "TÊN", winning_points: "ĐIỂM THẮング", save: "LƯU", winner: "THẮNG", confirm_reset: "ĐẶТ LẠＩ", win_condition: "ĐIỀU KIỆN", rule_deuce: "Cách 2 điểm", rule_sudden: "Chạm trước là thắng", scoring_system: "CÁCH TÍNH ĐIỂM", system_sideout: "Side Out", system_rally: "Rally Point", reset_names_label: "KHI ĐẶТ LẠＩ", names_keep: "Giữ tên", names_reset: "Reset tên" },
-            th: { current_score: "คะแนนปัจจุบัน", start: "เริ่ม", in_play: "กำลังแข่ง", team_a: "ทีม A", team_b: "ทีม B", point: "ได้แต้ม", fault: "เสีย", start_team: "สิทธิ์เสิร์フ", undo: "ย้อน刻", reset: "รีセット", settings: "ตั้งค่า", language: "ภาษา", orientation: "ทิศทางสนาม", vertical: "แนวตั้ง", horizontal: "แนวนอน", player_names: "ชื่อ", winning_points: "คะแนนชนะ", save: "บันทึก", winner: "ชนะ", confirm_reset: "รีเซ็ต", win_condition: "เงื่อนไข", rule_deuce: "ห่าง 2 แต้ม", rule_sudden: "ถึงก่อนชนะ", scoring_system: "ระบบแต้ม", system_sideout: "Side Out", system_rally: "Rally Point", reset_names_label: "เมื่อรีเซ็ต", names_keep: "เก็บชื่อ", names_reset: "รีセ็ตชื่อ" },
-            ru: { current_score: "ТЕКУЩИЙ СЧЕТ", start: "СТАРТ", in_play: "В ИГРЕ", team_a: "КОМАНДА А", team_b: "КОМАНДА Б", point: "ОЧКО", fault: "ОШИБКА", start_team: "ПОДАЧА", undo: "ОТМЕНА", reset: "СБРОС", settings: "НАСТРОЙКИ", language: "ЯЗЫК", orientation: "ОРИЕНТАЦИЯ", vertical: "ВЕРТИК.", horizontal: "ГОРИЗОНТ.", player_names: "ИМЕНА", winning_points: "ОЧКИ", save: "СОХРАНИＴЬ", winner: "ПОБЕДА", confirm_reset: "СБРОС", win_condition: "УСЛОВИЕ", rule_deuce: "Разница в 2", rule_sudden: "До первого", scoring_system: "СИСТЕМА", system_sideout: "Side Out", system_rally: "Rally Point", reset_names_label: "ПРИ СБРОСЕ", names_keep: "Сохранить", names_reset: "Сбросить" }
+        const translations = {
+            ja: {
+                subHeader: "App Repository",
+                descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
+                descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
+                descSports: "なんでも使えるシンプル得点アプリ。",
+                btnOpen: "Open Web",
+                btnApk: "Android版ダウンロード",
+                btnInstall: "インストール",
+                footer: "ログイン不要 ・ 広告なし ・ 地域密着"
+            },
+            en: {
+                subHeader: "App Repository",
+                descDoubles: "Fair matching app for doubles games.",
+                descPickle: "Visualize serving rights and positions. Specialized for accurate scoring.",
+                descSports: "A simple scoring app that can be used for anything.",
+                btnOpen: "Open Web",
+                btnApk: "Download for Android",
+                btnInstall: "Install",
+                footer: "No login required. Ad-free. Local focus."
+            },
+            es: {
+                subHeader: "Repositorio de Apps",
+                descDoubles: "App de emparejamiento justo para juegos de dobles.",
+                descPickle: "Visualiza turnos de saque y posiciones. Especializada en puntuación precisa.",
+                descSports: "Una app sencilla para llevar la puntuación de cualquier deporte.",
+                btnOpen: "Abrir Web",
+                btnApk: "Descargar Android",
+                btnInstall: "Instalar",
+                footer: "Sin registro. Sin anuncios. Enfoque local."
+            },
+            th: {
+                subHeader: "คลังแอปพลิเคชัน",
+                descDoubles: "แอปจัดทีมที่ยุติธรรมสำหรับเกมประเภทคู่",
+                descPickle: "แสดงสิทธิ์การเสิร์ฟและตำแหน่งผู้เล่น เน้นการนับคะแนนที่แม่นยำ",
+                descSports: "แอปนับคะแนนที่เรียบง่ายสำหรับทุกประเภทกีฬา",
+                btnOpen: "เปิดเว็บ",
+                btnApk: "ดาวน์โหลด Android",
+                btnInstall: "ติดตั้ง",
+                footer: "ไม่ต้องเข้าสู่ระบบ ・ ไม่มีโฆษณา ・ เน้นใช้งานในท้องถิ่น"
+            },
+            ru: {
+                subHeader: "Репозиторий приложений",
+                descDoubles: "Приложение для честного подбора пар в парных играх.",
+                descPickle: "Визуализация права подачи и позиций. Создано для точного подсчета очков.",
+                descSports: "Простое приложение для подсчета очков в любом виде спорта.",
+                btnOpen: "Открыть веб-сайт",
+                btnApk: "Скачать для Android",
+                btnInstall: "Установить",
+                footer: "Без регистрации. Без рекламы. Локальный фокус."
+            },
+            id: {
+                subHeader: "Repositori Aplikasi",
+                descDoubles: "Aplikasi pemasangan tim yang adil untuk permainan ganda.",
+                descPickle: "Visualisasikan hak servis dan posisi. Khusus untuk skor yang akurat.",
+                descSports: "Aplikasi pencatat skor sederhana untuk olahraga apa pun.",
+                btnOpen: "Buka Web",
+                btnApk: "Unduh Android",
+                btnInstall: "Instal",
+                footer: "Tanpa login. Tanpa iklan. Fokus lokal."
+            },
+            vi: {
+                subHeader: "Kho ứng dụng",
+                descDoubles: "Ứng dụng ghép cặp công bằng cho các trận đấu đôi.",
+                descPickle: "Trực quan hóa quyền giao bóng và vị trí. Chuyên dụng để ghi điểm chính xác.",
+                descSports: "Ứng dụng ghi điểm đơn giản cho mọi mục đích.",
+                btnOpen: "Mở Web",
+                btnApk: "Tải cho Android",
+                btnInstall: "Cài đặt",
+                footer: "Không cần đăng nhập. Không quảng cáo. Tập trung nội bộ."
+            }
         };
 
-        const getInitialState = () => ({
-            scores: [0, 0], servingTeam: 0, serverNumber: 2, serverIsOnRight: true, 
-            isFirstServeOfGame: true, history: [], resetConfirm: false, lang: 'ja', 
-            winningPoints: 11, orientation: 'vertical', winCondition: 'deuce', scoringSystem: 'sideout',
-            resetNamesOnReset: 'keep',
-            teamASwapped: false, teamBSwapped: false,
-            names: { 'A1': '', 'A2': '', 'B1': '', 'B2': '' }
+        function setLanguage(lang) {
+            const t = translations[lang];
+            if(!t) return;
+
+            document.getElementById('sub-header').innerText = t.subHeader;
+            document.getElementById('desc-doubles').innerText = t.descDoubles;
+            document.getElementById('desc-pickle').innerText = t.descPickle;
+            document.getElementById('desc-sports').innerText = t.descSports;
+            document.getElementById('footer-text').innerText = t.footer;
+
+            document.querySelectorAll('.btn-open').forEach(el => el.innerHTML = t.btnOpen);
+            document.querySelectorAll('.btn-apk').forEach(el => el.innerHTML = t.btnApk);
+            document.querySelectorAll('.btn-install').forEach(el => el.innerHTML = t.btnInstall);
+
+            document.getElementById('lang-selector').value = lang;
+            document.documentElement.lang = lang;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const browserLang = navigator.language.split('-')[0];
+            const defaultLang = translations[browserLang] ? browserLang : 'en';
+            setLanguage(defaultLang);
         });
-
-        let state = getInitialState();
-
-        function isGameOver() {
-            const scoreA = state.scores[0], scoreB = state.scores[1], target = state.winningPoints;
-            if (state.winCondition === 'deuce') return (Math.max(scoreA, scoreB) >= target) && Math.abs(scoreA - scoreB) >= 2;
-            return (scoreA >= target || scoreB >= target);
-        }
-
-        function translate() {
-            const t = i18n[state.lang] || i18n.en;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) el.innerText = t[key];
-            });
-            updateUI();
-        }
-
-        function updateUI() {
-            const isRally = state.scoringSystem === 'rally';
-            const myScore = state.scores[state.servingTeam], opScore = state.scores[1 - state.servingTeam];
-            
-            document.getElementById('display-score').innerText = isRally ? `${myScore}-${opScore}` : `${myScore}-${opScore}-${state.serverNumber}`;
-            document.getElementById('target-points-display').innerText = `(${state.winningPoints}PTS)`;
-
-            const t = i18n[state.lang] || i18n.en, gameOver = isGameOver(), isH = state.orientation === 'horizontal';
-            document.body.className = isH ? 'h-mode-active' : 'v-mode-active';
-
-            document.getElementById('label-team-b-outer').style.display = isH ? 'none' : 'flex';
-            document.getElementById('label-team-a-outer').style.display = isH ? 'none' : 'flex';
-
-            const render = (id, playerKey) => {
-                const el = document.getElementById(id);
-                const label = playerKey.substring(0,1) + '-' + playerKey.substring(1);
-                el.innerText = state.names[playerKey] || label;
-                el.classList.remove('active-server');
-            };
-
-            if (!isH) {
-                render('p-B-L', !state.teamBSwapped ? 'B1' : 'B2');
-                render('p-B-R', !state.teamBSwapped ? 'B2' : 'B1');
-                render('p-A-L', !state.teamASwapped ? 'A2' : 'A1');
-                render('p-A-R', !state.teamASwapped ? 'A1' : 'A2');
-            } else {
-                render('p-B-R', !state.teamBSwapped ? 'B1' : 'B2');
-                render('p-B-L', !state.teamBSwapped ? 'B2' : 'B1');
-                render('p-A-L', !state.teamASwapped ? 'A1' : 'A2');
-                render('p-A-R', !state.teamASwapped ? 'A2' : 'A1');
-            }
-
-            ['v', 'h'].forEach(mode => {
-                const dotA = document.getElementById(`dot-A-${mode}`), dotB = document.getElementById(`dot-B-${mode}`);
-                if(dotA) dotA.classList.toggle('active', state.servingTeam === 0);
-                if(dotB) dotB.classList.toggle('active', state.servingTeam === 1);
-            });
-
-            const winOverlayExist = document.querySelector('.win-overlay');
-            if (gameOver) {
-                if (!winOverlayExist) {
-                    const winnerIdx = state.scores[0] > state.scores[1] ? 0 : 1;
-                    const winAreaId = winnerIdx === 0 ? 'area-a' : 'area-b';
-                    const container = document.getElementById(winAreaId);
-                    const winMsg = document.createElement('div');
-                    winMsg.className = 'win-overlay'; winMsg.innerText = 'WIN';
-                    container.appendChild(winMsg);
-                }
-            } else if (winOverlayExist) winOverlayExist.remove();
-
-            let targetId;
-            let currentServerIsOnRight = isRally ? (state.scores[state.servingTeam] % 2 === 0) : state.serverIsOnRight;
-            
-            if (!isH) {
-                if (state.servingTeam === 0) { targetId = currentServerIsOnRight ? 'p-A-R' : 'p-A-L'; } 
-                else { targetId = currentServerIsOnRight ? 'p-B-L' : 'p-B-R'; }
-            } else {
-                if (state.servingTeam === 0) { targetId = currentServerIsOnRight ? 'p-A-L' : 'p-A-R'; } 
-                else { targetId = currentServerIsOnRight ? 'p-B-R' : 'p-B-L'; }
-            }
-
-            const serverEl = document.getElementById(targetId);
-            if (serverEl && !gameOver) serverEl.classList.add('active-server');
-
-            document.getElementById('btn-point').disabled = gameOver;
-            document.getElementById('btn-fault').disabled = gameOver;
-            document.getElementById('btn-toggle-serve').disabled = (state.history.length > 0 || gameOver);
-            document.getElementById('btn-undo').disabled = (state.history.length === 0 || gameOver);
-            
-            const btnReset = document.getElementById('btn-reset');
-            btnReset.innerText = state.resetConfirm ? t.confirm_reset : t.reset;
-            btnReset.classList.toggle('reset-confirm', state.resetConfirm);
-            btnReset.classList.toggle('reset-standout', gameOver);
-            
-            document.getElementById('game-status').innerText = gameOver ? `${t.winner}: ${state.scores[0] > state.scores[1] ? 'A' : 'B'}` : (state.history.length === 0 ? t.start : t.in_play);
-        }
-
-        function saveHistory() {
-            const stateToSave = JSON.parse(JSON.stringify(state));
-            delete stateToSave.history;
-            state.history.push(JSON.stringify(stateToSave));
-            if (state.history.length > 50) state.history.shift();
-            state.resetConfirm = false;
-        }
-
-        document.getElementById('btn-point').onclick = () => {
-            if (isGameOver()) return;
-            saveHistory();
-            if (state.scoringSystem !== 'rally') {
-                if (state.servingTeam === 0) state.teamASwapped = !state.teamASwapped;
-                else state.teamBSwapped = !state.teamBSwapped;
-                state.serverIsOnRight = !state.serverIsOnRight;
-            }
-            state.scores[state.servingTeam]++;
-            updateUI();
-        };
-
-        document.getElementById('btn-fault').onclick = () => {
-            if (isGameOver()) return;
-            saveHistory();
-            if (state.scoringSystem === 'rally') {
-                state.scores[1 - state.servingTeam]++;
-                state.servingTeam = 1 - state.servingTeam;
-            } else {
-                if (state.isFirstServeOfGame) { state.servingTeam = 1 - state.servingTeam; state.serverNumber = 1; state.serverIsOnRight = true; state.isFirstServeOfGame = false; }
-                else if (state.serverNumber === 1) { state.serverNumber = 2; state.serverIsOnRight = !state.serverIsOnRight; }
-                else { state.servingTeam = 1 - state.servingTeam; state.serverNumber = 1; state.serverIsOnRight = true; }
-            }
-            updateUI();
-        };
-
-        document.getElementById('btn-toggle-serve').onclick = () => {
-            if (state.history.length > 0 || isGameOver()) return;
-            state.servingTeam = 1 - state.servingTeam; updateUI();
-        };
-
-        document.getElementById('btn-undo').onclick = () => {
-            if (state.history.length > 0 && !isGameOver()) { Object.assign(state, JSON.parse(state.history.pop())); updateUI(); }
-        };
-
-        document.getElementById('btn-reset').onclick = () => {
-            if (!state.resetConfirm) { state.resetConfirm = true; updateUI(); setTimeout(() => { if (state.resetConfirm) { state.resetConfirm = false; updateUI(); } }, 3000); }
-            else { 
-                const cur = { lang: state.lang, wp: state.winningPoints, orient: state.orientation, wc: state.winCondition, ss: state.scoringSystem, nr: state.resetNamesOnReset, names: {...state.names} };
-                Object.assign(state, getInitialState()); 
-                state.lang = cur.lang; state.winningPoints = cur.wp; state.orientation = cur.orient; state.winCondition = cur.wc; state.scoringSystem = cur.ss; state.resetNamesOnReset = cur.nr;
-                if (cur.nr === 'keep') state.names = cur.names;
-                state.teamASwapped = false; state.teamBSwapped = false;
-                updateUI(); 
-            }
-        };
-
-        document.getElementById('btn-settings').onclick = () => {
-            document.getElementById('settings-modal').style.display = 'flex';
-            ['A1', 'A2', 'B1', 'B2'].forEach(k => document.getElementById(`name-${k}`).value = state.names[k]);
-            document.getElementById('lang-select').value = state.lang;
-            document.getElementById('winning-points-input').value = state.winningPoints;
-            document.getElementById('orient-select').value = state.orientation;
-            document.getElementById('win-cond-select').value = state.winCondition;
-            document.getElementById('scoring-select').value = state.scoringSystem;
-            document.getElementById('reset-names-select').value = state.resetNamesOnReset;
-        };
-        
-        document.getElementById('btn-save-settings').onclick = () => {
-            state.lang = document.getElementById('lang-select').value;
-            state.orientation = document.getElementById('orient-select').value;
-            state.winCondition = document.getElementById('win-cond-select').value;
-            state.scoringSystem = document.getElementById('scoring-select').value;
-            state.resetNamesOnReset = document.getElementById('reset-names-select').value;
-            state.winningPoints = parseInt(document.getElementById('winning-points-input').value) || 11;
-            ['A1', 'A2', 'B1', 'B2'].forEach(k => state.names[k] = document.getElementById(`name-${k}`).value);
-            document.getElementById('settings-modal').style.display = 'none';
-            translate();
-        };
-
-        document.getElementById('btn-close-settings').onclick = () => document.getElementById('settings-modal').style.display = 'none';
-        window.onload = () => translate();
     </script>
 </body>
 </html>
