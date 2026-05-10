@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BisFactory | Pattaya App Repository</title>
-    <meta name="description" content="PWA apps for the Pattaya community">
+    <title>BisFactory | Global App Repository</title>
+    <meta name="description" content="Innovative PWA apps for the global community">
     
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
@@ -33,7 +33,6 @@
             border: 1px solid #1f2937;
             transition: border-color 0.2s ease;
         }
-        /* プルダウンのスタイル */
         .lang-select {
             appearance: none;
             background-color: #111111;
@@ -50,10 +49,8 @@
             cursor: pointer;
             transition: border-color 0.2s ease;
         }
-        .lang-select:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
+        details summary::-webkit-details-marker { display:none; }
+        summary { list-style: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -62,9 +59,7 @@
         
         <header class="flex justify-between items-center mb-8">
             <div class="flex-shrink">
-                <h1 class="text-4xl font-black italic tracking-tighter">
-                    BisFactory
-                </h1>
+                <h1 class="text-4xl font-black italic tracking-tighter">BisFactory</h1>
                 <div class="h-1 w-8 bg-blue-600 mt-1"></div>
             </div>
             
@@ -81,24 +76,17 @@
             </div>
         </header>
 
-        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-12">
-            App Repository
-        </p>
+        <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-12">App Repository</p>
 
         <div class="grid gap-5">
-
             <section class="glass-card rounded-3xl p-6">
                 <div class="flex justify-between items-start mb-2">
                     <h2 class="text-xl font-bold tracking-tight">Doubles Taisen</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-                <p id="desc-doubles" class="text-sm text-gray-400 mb-6 leading-relaxed">
-                    ダブルスゲームでの平等な組合せアプリ。
-                </p>
+                <p id="desc-doubles" class="text-sm text-gray-400 mb-6 leading-relaxed">ダブルスゲームでの平等な組合せアプリ。</p>
                 <div class="flex gap-3">
-                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">
-                        Open Web
-                    </a>
+                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">Open Web</a>
                 </div>
             </section>
 
@@ -107,16 +95,10 @@
                     <h2 class="text-xl font-bold tracking-tight">Pickleball Score</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-yellow-900/30 text-yellow-400 border border-yellow-800">BETA</span>
                 </div>
-                <p id="desc-pickle" class="text-sm text-gray-400 mb-6 leading-relaxed">
-                    サーバー権とポジションを視覚化。正確なスコアリングに特化。
-                </p>
+                <p id="desc-pickle" class="text-sm text-gray-400 mb-6 leading-relaxed">サーバー権とポジションを視覚化。正確なスコアリングに特化。</p>
                 <div class="flex gap-3">
-                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">
-                        Android Download
-                    </a>
-                    <a href="https://bisiwait.github.io/bisfactory/pb/" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-ios" target="_blank">
-                        iOS Download
-                    </a>
+                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">Android Download</a>
+                    <a href="https://bisiwait.github.io/bisfactory/pb/" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-ios" target="_blank">iOS Download</a>
                 </div>
             </section>
 
@@ -125,23 +107,26 @@
                     <h2 class="text-xl font-bold tracking-tight">Sports Score</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-                <p id="desc-sports" class="text-sm text-gray-400 mb-6 leading-relaxed">
-                    なんでも使えるシンプル得点アプリ。
-                </p>
+                <p id="desc-sports" class="text-sm text-gray-400 mb-4 leading-relaxed font-bold">「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。</p>
+
+                <details class="mb-6 group">
+                    <summary id="summary-text" class="text-xs text-blue-500 font-bold cursor-pointer list-none flex items-center gap-1 group-open:mb-4">
+                        <span>詳細を確認</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <div id="details-sports" class="space-y-4 text-[11px] text-gray-400 border-l-2 border-gray-800 pl-4 py-1"></div>
+                </details>
+
                 <div class="flex gap-3">
-                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">
-                        Install
-                    </a>
+                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">Install</a>
                 </div>
             </section>
-
         </div>
 
         <footer class="mt-20 text-center">
             <p class="text-[10px] text-gray-600 font-bold tracking-[0.4em] uppercase mb-1">Developed by BisFactory</p>
             <p id="footer-text" class="text-[9px] text-gray-800 font-medium">No login required. Ad-free. Local focus.</p>
         </footer>
-
     </div>
 
     <script>
@@ -150,96 +135,122 @@
                 subHeader: "App Repository",
                 descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
                 descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
-                descSports: "なんでも使えるシンプル得点アプリ。",
-                btnOpen: "ウェブで開く",
-                btnApk: "Android版ダウンロード",
-                btnIos: "iOS版 (PWA)",
-                btnInstall: "インストール",
-                footer: "ログイン不要 ・ 広告なし ・ 地域密着"
+                descSports: "「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。",
+                summaryText: "詳細を確認",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">白熱するセルフジャッジ試合に</p><p>審判がいない練習試合でも、ポケットから取り出すだけで正確なスコアをキープ。集中力を切らすことなく、次の一打に打ち込めます。</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">ルールの混乱を解消</p><p>「ラリーポイント」と「サイドアウト」。競技によって異なるルールも、設定ひとつで即座に切り替え。どんな試合形式にも柔軟に対応します。</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">タップするだけの直感操作</p><p>画面の左右をタップするだけでカウントアップ。試合の熱狂を邪魔しない、削ぎ落とされたシンプルなUIデザイン。</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">2つの公式ルールを網羅</p><p>・ラリーポイント： 全てのポイントで得点が動く、スピード感のある試合に。</p><p>・サイドアウト： サーブ権がある時のみ得点が入る、競技者向けの本格的な仕様。</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">サーバーガイド機能</p><p>「次は誰が、どちらのサイドから打つべきか」を視覚的にナビゲート。サーブ権の移動も自動で計算します。</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ リアルタイム・ライブ同期</p><p class="text-blue-300/80 leading-normal text-[10px]">スコアは常にクラウドで同期され、離れた場所にいる仲間のスマホからも、今この瞬間のスコアをリアルタイムでチェックできます。</p></div>`,
+                btnOpen: "ウェブで開く", btnApk: "Android版", btnIos: "iOS版 (PWA)", btnInstall: "インストール", footer: "ログイン不要 ・ 広告なし ・ 現場主義"
             },
             en: {
                 subHeader: "App Repository",
                 descDoubles: "Fair matching app for doubles games.",
-                descPickle: "Visualize serving rights and positions. Specialized for accurate scoring.",
-                descSports: "A simple scoring app that can be used for anything.",
-                btnOpen: "Open Web",
-                btnApk: "Download for Android",
-                btnIos: "iOS Version (PWA)",
-                btnInstall: "Install",
-                footer: "No login required. Ad-free. Local focus."
+                descPickle: "Visualize positions. Specialized for accurate scoring.",
+                descSports: "Eliminate 'What's the score?'. Scoring app for courts worldwide.",
+                summaryText: "View Details",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">For Intense Self-Judged Matches</p><p>Keep accurate scores without a referee. Stay focused on your next shot.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Eliminate Rule Confusion</p><p>Switch between Rally Point and Side-Out instantly. Adapt to any format.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Intuitive Tap Control</p><p>Just tap the left or right of the screen. Simple UI that won't distract you.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Covers 2 Official Rules</p><p>• Rally Point: Every point counts. Fast-paced.</p><p>• Side-Out: Only the server scores. Professional spec.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Server Guide Function</p><p>Visually navigates "Who's next and from which side". Automatic rotation calculation.</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ Real-time Live Sync</p><p class="text-blue-300/80 leading-normal text-[10px]">Cloud synced. Friends afar can check live scores in real-time from their devices.</p></div>`,
+                btnOpen: "Open Web", btnApk: "Android", btnIos: "iOS (PWA)", btnInstall: "Install", footer: "No login required ・ Ad-free ・ Local focus"
             },
             es: {
                 subHeader: "Repositorio de Apps",
-                descDoubles: "App de emparejamiento justo para juegos de dobles.",
-                descPickle: "Visualiza turnos de saque y posiciones. Especializada en puntuación precisa.",
-                descSports: "Una app sencilla para llevar la puntuación de cualquier deporte.",
-                btnOpen: "Abrir Web",
-                btnApk: "Descargar Android",
-                btnIos: "Versión iOS (PWA)",
-                btnInstall: "Instalar",
-                footer: "Sin registro. Sin anuncios. Enfoque local."
+                descDoubles: "App para emparejamientos justos en juegos de dobles.",
+                descPickle: "Visualiza posiciones. Especializada en puntuación precisa.",
+                descSports: "Elimina el '¿Cuál es el marcador?'. App para canchas de todo el mundo.",
+                summaryText: "Ver detalles",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">Para partidos intensos</p><p>Mantén puntuaciones precisas sin árbitro.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Reglas flexibles</p><p>Punto de rally o cambio de saque al instante.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Control táctil intuitivo</p><p>Toca para sumar puntos. Diseño simple.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Reglas oficiales</p><p>Cubre Rally Point y Side-Out.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Guía del servidor</p><p>Navega visualmente quién sirve y desde dónde.</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ Sincronización en tiempo real</p><p>Tus amigos pueden ver el marcador en vivo desde cualquier lugar.</p></div>`,
+                btnOpen: "Abrir Web", btnApk: "Android", btnIos: "iOS (PWA)", btnInstall: "Instalar", footer: "Sin registro ・ Sin anuncios ・ Enfoque local"
             },
             th: {
-                subHeader: "คลังแอปพลิเคชัน",
-                descDoubles: "แอปจัดทีมที่ยุติธรรมสำหรับเกมประเภทคู่",
-                descPickle: "แสดงสิทธิ์การเสิร์ฟและตำแหน่งผู้เล่น เน้นการนับคะแนนที่แม่นยำ",
-                descSports: "แอปนับคะแนนที่เรียบง่ายสำหรับทุกประเภทกีฬา",
-                btnOpen: "เปิดเว็บ",
-                btnApk: "ดาวน์โหลด Android",
-                btnIos: "เวอร์ชัน iOS (PWA)",
-                btnInstall: "ติดตั้ง",
-                footer: "ไม่ต้องเข้าสู่ระบบ ・ ไม่มีโฆษณา ・ เน้นใช้งานในท้องถิ่น"
+                subHeader: "ศูนย์รวมแอป",
+                descDoubles: "แอปจัดคู่เล่นเกมคู่ให้เท่าเทียมกัน",
+                descPickle: "แสดงตำแหน่งผู้เล่นและสิทธิ์เสิร์ฟ เน้นการนับแต้มที่แม่นยำ",
+                descSports: "จบปัญหา 'แต้มเท่าไหร่แล้ว' แอปนับแต้มสำหรับสนามทั่วโลก",
+                summaryText: "ดูรายละเอียด",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">สำหรับการแข่งที่ไม่มีผู้ตัดสิน</p><p>นับคะแนนแม่นยำแม้ไม่มีกรรมการ มีสมาธิกับเกมได้อย่างเต็มที่</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">สลับกติกาได้ทันที</p><p>รองรับทั้ง Rally Point และ Side-Out เปลี่ยนได้เพียงปลายนิ้ว</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">ใช้งานง่ายเพียงแตะ</p><p>แตะซ้ายหรือขวาเพื่อเพิ่มคะแนน ดีไซน์เรียบง่ายไม่รบกวนเกม</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">ครอบคลุมกฎกติกาสากล</p><p>รองรับกฎ Rally Point และ Side-Out แบบมืออาชีพ</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">ระบบนำทางผู้เสิร์ฟ</p><p>บอกชัดเจนว่าใครต้องเสิร์ฟและจากฝั่งไหน คำนวณการสลับฝั่งอัตโนมัติ</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ ซิงค์ข้อมูลแบบเรียลไทม์</p><p class="text-blue-300/80 leading-normal text-[10px]">ซิงค์ข้อมูลผ่านคลาวด์ เพื่อนที่อยู่ไกลสามารถดูคะแนนสดได้ทันทีจากมือถือของตัวเอง</p></div>`,
+                btnOpen: "เปิดเว็บ", btnApk: "ดาวน์โหลด Android", btnIos: "iOS (PWA)", btnInstall: "ติดตั้ง", footer: "ไม่ต้องล็อกอิน ・ ไม่มีโฆษณา ・ เน้นใช้งานจริง"
             },
             ru: {
                 subHeader: "Репозиторий приложений",
                 descDoubles: "Приложение для честного подбора пар в парных играх.",
-                descPickle: "Визуализация права подачи и позиций. Создано для точного подсчета очков.",
-                descSports: "Простое приложение для подсчета очков в любом виде спорта.",
-                btnOpen: "Открыть веб-сайт",
-                btnApk: "Скачать для Android",
-                btnIos: "Версия для iOS (PWA)",
-                btnInstall: "Установить",
-                footer: "Без регистрации. Без рекламы. Локальный фокус."
+                descPickle: "Визуализация позиций. Специализировано на точном счете.",
+                descSports: "Забудьте вопрос 'Какой счет?'. Приложение для кортов по всему миру.",
+                summaryText: "Подробнее",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">Для матчей без судей</p><p>Точный счет всегда под рукой. Сосредоточьтесь на игре.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Любые правила</p><p>Переключайтесь между Rally Point и Side-Out мгновенно.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Простое управление</p><p>Нажимайте на экран для подсчета. Минималистичный дизайн.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Официальные правила</p><p>Поддержка всех стандартных форматов матчей.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Гид по подаче</p><p>Показывает, кто и с какой стороны должен подавать.</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ Живая синхронизация</p><p>Счет синхронизируется в облаке. Друзья могут следить за игрой в реальном времени.</p></div>`,
+                btnOpen: "Открыть", btnApk: "Android", btnIos: "iOS (PWA)", btnInstall: "Установить", footer: "Без регистрации ・ Без рекламы ・ Локальный фокус"
             },
             id: {
                 subHeader: "Repositori Aplikasi",
-                descDoubles: "Aplikasi pemasangan tim yang adil untuk permainan ganda.",
-                descPickle: "Visualisasikan hak servis dan posisi. Khusus untuk skor yang akurat.",
-                descSports: "Aplikasi pencatat skor sederhana untuk olahraga apa pun.",
-                btnOpen: "Buka Web",
-                btnApk: "Unduh Android",
-                btnIos: "Versi iOS (PWA)",
-                btnInstall: "Instal",
-                footer: "Tanpa login. Tanpa iklan. Fokus lokal."
+                descDoubles: "Aplikasi pasangan adil untuk permainan ganda.",
+                descPickle: "Visualisasi posisi. Khusus untuk skor yang akurat.",
+                descSports: "Hapus pertanyaan 'Berapa skornya?'. Aplikasi untuk lapangan seluruh dunia.",
+                summaryText: "Lihat Detail",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">Untuk Pertandingan Tanpa Wasit</p><p>Catat skor akurat tanpa gangguan. Fokus pada pukulan Anda.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Atur Aturan Secara Instan</p><p>Pilih Rally Point atau Side-Out dengan mudah.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Kontrol Tap Intuitif</p><p>Cukup ketuk layar. Desain UI yang sangat simpel.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">2 Aturan Resmi</p><p>Mencakup Rally Point dan Side-Out profesional.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Panduan Server</p><p>Navigasi visual siapa yang harus servis dan dari sisi mana.</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ Sinkronisasi Real-time</p><p>Skor disinkronkan ke cloud. Teman dapat memantau skor langsung dari perangkat mereka.</p></div>`,
+                btnOpen: "Buka Web", btnApk: "Android", btnIos: "iOS (PWA)", btnInstall: "Instal", footer: "Tanpa login ・ Tanpa iklan ・ Fokus lokal"
             },
             vi: {
                 subHeader: "Kho ứng dụng",
-                descDoubles: "Ứng dụng ghép cặp công bằng cho các trận đấu đôi.",
-                descPickle: "Trực quan hóa quyền giao bóng và vị trí. Chuyên dụng để ghi điểm chính xác.",
-                descSports: "Ứng dụng ghi điểm đơn giản cho mọi mục đích.",
-                btnOpen: "Mở Web",
-                btnApk: "Tải cho Android",
-                btnIos: "Bản iOS (PWA)",
-                btnInstall: "Cài đặt",
-                footer: "Không cần đăng nhập. Không quảng cáo. Tập trung nội bộ."
+                descDoubles: "Ứng dụng ghép cặp công bằng cho đánh đôi.",
+                descPickle: "Trực quan hóa vị trí. Chuyên dùng để tính điểm chính xác.",
+                descSports: "Xóa tan câu hỏi 'Tỉ số bao nhiêu?'. Ứng dụng tính điểm toàn cầu.",
+                summaryText: "Xem chi tiết",
+                detailsSports: `
+                    <div class="mb-3"><p class="font-bold text-gray-200">Dành cho trận đấu tự trọng tài</p><p>Giữ tỉ số chính xác mà không cần trọng tài. Tập trung vào từng cú đánh.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Xử lý mọi luật chơi</p><p>Chuyển đổi Rally Point và Side-Out ngay lập tức.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Thao tác chạm đơn giản</p><p>Chỉ cần chạm trái/phải để tính điểm. Giao diện cực tối giản.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">2 Luật chơi chính thức</p><p>Bao gồm Rally Point và Side-Out chuyên nghiệp.</p></div>
+                    <div class="mb-3"><p class="font-bold text-gray-200">Hướng dẫn giao bóng</p><p>Chỉ dẫn trực quan ai giao bóng và từ phía nào.</p></div>
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-xl border border-blue-800/30"><p class="font-bold text-blue-400 text-[12px] mb-1">★ Đồng bộ thời gian thực</p><p>Tỉ số đồng bộ đám mây. Bạn bè có thể theo dõi trực tiếp từ điện thoại của họ.</p></div>`,
+                btnOpen: "Mở Web", btnApk: "Tải Android", btnIos: "iOS (PWA)", btnInstall: "Cài đặt", footer: "Không cần đăng nhập ・ Không quảng cáo ・ Tiện ích nội bộ"
             }
         };
 
         function setLanguage(lang) {
-            const t = translations[lang];
-            if(!t) return;
-
+            const t = translations[lang] || translations['en'];
             document.getElementById('sub-header').innerText = t.subHeader;
             document.getElementById('desc-doubles').innerText = t.descDoubles;
             document.getElementById('desc-pickle').innerText = t.descPickle;
             document.getElementById('desc-sports').innerText = t.descSports;
+            document.getElementById('summary-text').querySelector('span').innerText = t.summaryText;
+            document.getElementById('details-sports').innerHTML = t.detailsSports;
             document.getElementById('footer-text').innerText = t.footer;
-
             document.querySelectorAll('.btn-open').forEach(el => el.innerHTML = t.btnOpen);
             document.querySelectorAll('.btn-apk').forEach(el => el.innerHTML = t.btnApk);
-            document.querySelectorAll('.btn-ios').forEach(el => el.innerHTML = t.btnIos); // iOSボタンへの翻訳適用
+            document.querySelectorAll('.btn-ios').forEach(el => el.innerHTML = t.btnIos);
             document.querySelectorAll('.btn-install').forEach(el => el.innerHTML = t.btnInstall);
-
             document.getElementById('lang-selector').value = lang;
             document.documentElement.lang = lang;
         }
