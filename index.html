@@ -86,7 +86,7 @@
                 </div>
                 <p id="desc-doubles" class="text-sm text-gray-400 mb-6 leading-relaxed">ダブルスゲームでの平等な組合せアプリ。</p>
                 <div class="flex gap-3">
-                    <a href="https://doubles-taisen.web.app" target="_blank" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">Open Web</a>
+                    <a href="https://doubles-taisen.web.app" target="_blank" onclick="va('event', { name: 'click_taisen_web' })" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">Open Web</a>
                 </div>
             </section>
 
@@ -97,8 +97,8 @@
                 </div>
                 <p id="desc-pickle" class="text-sm text-gray-400 mb-6 leading-relaxed">サーバー権とポジションを視覚化。正確なスコアリングに特化。</p>
                 <div class="flex gap-3">
-                    <a href="apk/pikkleballscore.apk" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">Android Download</a>
-                    <a href="https://bisiwait.github.io/bisfactory/pb/" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-ios" target="_blank">iOS Download</a>
+                    <a href="apk/pikkleballscore.apk" onclick="va('event', { name: 'click_pickle_android' })" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-apk">Android Download</a>
+                    <a href="https://bisiwait.github.io/bisfactory/pb/" onclick="va('event', { name: 'click_pickle_ios' })" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-ios" target="_blank">iOS Download</a>
                 </div>
             </section>
 
@@ -109,7 +109,7 @@
                 </div>
                 <p id="desc-sports" class="text-sm text-gray-400 mb-4 leading-relaxed font-bold">「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。</p>
 
-                <details class="mb-6 group">
+                <details class="mb-6 group" onclick="if(!this.open) va('event', { name: 'open_sports_details' })">
                     <summary id="summary-text" class="text-xs text-blue-500 font-bold cursor-pointer list-none flex items-center gap-1 group-open:mb-4">
                         <span>詳細を確認</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" /></svg>
@@ -118,7 +118,7 @@
                 </details>
 
                 <div class="flex gap-3">
-                    <a href="https://sports-score-theta.vercel.app/install" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">Install</a>
+                    <a href="https://sports-score-theta.vercel.app/install" onclick="va('event', { name: 'click_sports_install' })" target="_blank" rel="noopener noreferrer" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-install">Install</a>
                 </div>
             </section>
         </div>
@@ -261,6 +261,9 @@
             setLanguage(defaultLang);
         });
     </script>
-	<script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
 </body>
 </html>
