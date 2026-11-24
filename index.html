@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BisFactory | Global App Repository</title>
     <meta name="description" content="Innovative PWA apps for the global community">
-    
+
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#000000">
@@ -16,11 +16,11 @@
     <link rel="icon" type="image/png" href="assets/icon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
-    
+
     <style>
         body {
             font-family: 'Inter', 'Noto Color Emoji', sans-serif;
@@ -56,13 +56,13 @@
 <body class="antialiased">
 
     <div class="min-h-screen max-w-md mx-auto px-5 pt-12 pb-24">
-        
+
         <header class="flex justify-between items-center mb-8">
             <div class="flex-shrink">
                 <h1 class="text-4xl font-black italic tracking-tighter">BisFactory</h1>
                 <div class="h-1 w-8 bg-blue-600 mt-1"></div>
             </div>
-            
+
             <div class="flex-shrink-0">
                 <select onchange="setLanguage(this.value)" id="lang-selector" class="lang-select">
                     <option value="ja">🇯🇵 JP</option>
@@ -79,6 +79,18 @@
         <p id="sub-header" class="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold mb-12">App Repository</p>
 
         <div class="grid gap-5">
+            <section class="glass-card rounded-3xl p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-xl font-bold tracking-tight">Tournament Pro</h2>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
+                </div>
+                <p id="desc-tournament" class="text-sm text-gray-400 mb-6 leading-relaxed">エントリーからリーグ順位自動計算・グループ戦・決勝トーナメントまで一元管理できる大会運営コンソール。</p>
+                <div class="flex gap-3">
+                    <a href="https://tournament-pro.app" target="_blank" onclick="va('event', { name: 'click_tournament_web' })" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform btn-open">Open Web</a>
+                    <a href="/tournament-pro" class="flex-[1] border border-gray-700 text-white text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">詳細を見る</a>
+                </div>
+            </section>
+
             <section class="glass-card rounded-3xl p-6">
                 <div class="flex justify-between items-start mb-2">
                     <h2 class="text-xl font-bold tracking-tight">Doubles Taisen</h2>
@@ -133,6 +145,7 @@
         const translations = {
             ja: {
                 subHeader: "App Repository",
+                descTournament: "エントリーからリーグ順位自動計算・グループ戦・決勝トーナメントまで一元管理できる大会運営コンソール。",
                 descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
                 descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
                 descSports: "「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。",
@@ -148,6 +161,7 @@
             },
             en: {
                 subHeader: "App Repository",
+                descTournament: "Run tournaments from entry through league standings, group stage, and knockout bracket in one console.",
                 descDoubles: "Fair matching app for doubles games.",
                 descPickle: "Visualize positions. Specialized for accurate scoring.",
                 descSports: "Eliminate 'What's the score?'. Scoring app for courts worldwide.",
@@ -163,6 +177,7 @@
             },
             es: {
                 subHeader: "Repositorio de Apps",
+                descTournament: "Gestiona torneos desde la inscripción hasta la liga, grupos y bracket eliminatorio en una sola consola.",
                 descDoubles: "App para emparejamientos justos en juegos de dobles.",
                 descPickle: "Visualiza posiciones. Especializada en puntuación precisa.",
                 descSports: "Elimina el '¿Cuál es el marcador?'. App para canchas de todo el mundo.",
@@ -178,6 +193,7 @@
             },
             th: {
                 subHeader: "ศูนย์รวมแอป",
+                descTournament: "จัดการทัวร์นาเมนต์ครบในที่เดียว ตั้งแต่ลงทะเบียนทีม ตารางคะแนนรอบลีก รอบแบ่งกลุ่ม จนถึงสายน็อกเอาต์",
                 descDoubles: "แอปจัดคู่เล่นเกมคู่ให้เท่าเทียมกัน",
                 descPickle: "แสดงตำแหน่งผู้เล่นและสิทธิ์เสิร์ฟ เน้นการนับแต้มที่แม่นยำ",
                 descSports: "จบปัญหา 'แต้มเท่าไหร่แล้ว' แอปนับแต้มสำหรับสนามทั่วโลก",
@@ -193,6 +209,7 @@
             },
             ru: {
                 subHeader: "Репозиторий приложений",
+                descTournament: "Управляйте турниром от регистрации до таблицы лиги, группового этапа и сетки плей-офф в одном приложении.",
                 descDoubles: "Приложение для честного подбора пар в парных играх.",
                 descPickle: "Визуализация позиций. Специализировано на точном счете.",
                 descSports: "Забудьте вопрос 'Какой счет?'. Приложение для кортов по всему миру.",
@@ -208,6 +225,7 @@
             },
             id: {
                 subHeader: "Repositori Aplikasi",
+                descTournament: "Kelola turnamen dari pendaftaran hingga klasemen liga, babak grup, dan bracket knockout dalam satu konsol.",
                 descDoubles: "Aplikasi pasangan adil untuk permainan ganda.",
                 descPickle: "Visualisasi posisi. Khusus untuk skor yang akurat.",
                 descSports: "Hapus pertanyaan 'Berapa skornya?'. Aplikasi untuk lapangan seluruh dunia.",
@@ -223,6 +241,7 @@
             },
             vi: {
                 subHeader: "Kho ứng dụng",
+                descTournament: "Quản lý giải đấu từ đăng ký đến bảng xếp hạng, vòng bảng và nhánh loại trực tiếp trong một bảng điều khiển.",
                 descDoubles: "Ứng dụng ghép cặp công bằng cho đánh đôi.",
                 descPickle: "Trực quan hóa vị trí. Chuyên dùng để tính điểm chính xác.",
                 descSports: "Xóa tan câu hỏi 'Tỉ số bao nhiêu?'. Ứng dụng tính điểm toàn cầu.",
@@ -241,6 +260,7 @@
         function setLanguage(lang) {
             const t = translations[lang] || translations['en'];
             document.getElementById('sub-header').innerText = t.subHeader;
+            document.getElementById('desc-tournament').innerText = t.descTournament;
             document.getElementById('desc-doubles').innerText = t.descDoubles;
             document.getElementById('desc-pickle').innerText = t.descPickle;
             document.getElementById('desc-sports').innerText = t.descSports;
