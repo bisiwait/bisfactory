@@ -139,9 +139,9 @@
                     <h2 class="text-xl font-bold tracking-tight">PBprice JP</h2>
                     <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-900/30 text-blue-400 border border-blue-800">STABLE</span>
                 </div>
-                <p class="text-sm text-gray-400 mb-6 leading-relaxed">ピックルボールパドルの価格比較。Amazon・楽天の最安値をまとめてチェックできます。</p>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed" id="desc-pbprice">ピックルボールパドルの価格比較。Amazon・楽天の最安値をまとめてチェックできます。</p>
                 <div class="flex gap-3">
-                    <a href="https://jp.pbprice.com/pickleball" target="_blank" rel="noopener noreferrer" onclick="va('event', { name: 'click_pbprice_web' })" class="flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">サイトを見る</a>
+                    <a href="https://jp.pbprice.com/pickleball" target="_blank" rel="noopener noreferrer" onclick="va('event', { name: 'click_pbprice_web' })" class="btn-pbprice flex-[2] bg-white text-black text-center py-3.5 rounded-2xl text-sm font-black active:scale-[0.97] transition-transform">サイトを見る</a>
                 </div>
             </section>
         </div>
@@ -159,7 +159,7 @@
                 descTournament: "エントリーからリーグ順位自動計算・グループ戦・決勝トーナメントまで一元管理できる大会運営コンソール。",
                 descDoubles: "ダブルスゲームでの平等な組合せアプリ。",
                 descPickle: "サーバー権とポジションを視覚化。正確なスコアリングに特化。",
-                descSports: "「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。",
+                descSports: "「今、何点？」をゼロにする。世界中のコートで使えるスコア管理アプリ。",             descPbprice: "ピックルボールパドルの価格比較。Amazon・楽天の最安値をまとめてチェックできます。",
                 summaryText: "詳細を確認",
                 detailsSports: `
                     <div class="mb-3"><p class="font-bold text-gray-200">白熱するセルフジャッジ試合に</p><p>審判がいない練習試合でも、ポケットから取り出すだけで正確なスコアをキープ。集中力を切らすことなく、次の一打に打ち込めます。</p></div>
@@ -191,7 +191,7 @@
                 descTournament: "Gestiona torneos desde la inscripción hasta la liga, grupos y bracket eliminatorio en una sola consola.",
                 descDoubles: "App para emparejamientos justos en juegos de dobles.",
                 descPickle: "Visualiza posiciones. Especializada en puntuación precisa.",
-                descSports: "Elimina el '¿Cuál es el marcador?'. App para canchas de todo el mundo.",
+                descSports: "Elimina el '¿Cuál es el marcador?'. App para canchas de todo el mundo.", descPbprice: "Comparación de precios de palas de pickleball: consulta los precios más bajos de Amazon y Rakuten en un solo lugar.",
                 summaryText: "Ver detalles",
                 detailsSports: `
                     <div class="mb-3"><p class="font-bold text-gray-200">Para partidos intensos</p><p>Mantén puntuaciones precisas sin árbitro.</p></div>
@@ -207,7 +207,7 @@
                 descTournament: "จัดการทัวร์นาเมนต์ครบในที่เดียว ตั้งแต่ลงทะเบียนทีม ตารางคะแนนรอบลีก รอบแบ่งกลุ่ม จนถึงสายน็อกเอาต์",
                 descDoubles: "แอปจัดคู่เล่นเกมคู่ให้เท่าเทียมกัน",
                 descPickle: "แสดงตำแหน่งผู้เล่นและสิทธิ์เสิร์ฟ เน้นการนับแต้มที่แม่นยำ",
-                descSports: "จบปัญหา 'แต้มเท่าไหร่แล้ว' แอปนับแต้มสำหรับสนามทั่วโลก",
+                descSports: "จบปัญหา 'แต้มเท่าไหร่แล้ว' แอปนับแต้มสำหรับสนามทั่วโลก", descPbprice: "เปรียบเทียบราคาพายพิคเคิลบอล ตรวจสอบราคาต่ำสุดจาก Amazon และ Rakuten ได้ในที่เดียว",
                 summaryText: "ดูรายละเอียด",
                 detailsSports: `
                     <div class="mb-3"><p class="font-bold text-gray-200">สำหรับการแข่งที่ไม่มีผู้ตัดสิน</p><p>นับคะแนนแม่นยำแม้ไม่มีกรรมการ มีสมาธิกับเกมได้อย่างเต็มที่</p></div>
@@ -274,7 +274,7 @@
             document.getElementById('desc-tournament').innerText = t.descTournament;
             document.getElementById('desc-doubles').innerText = t.descDoubles;
             document.getElementById('desc-pickle').innerText = t.descPickle;
-            document.getElementById('desc-sports').innerText = t.descSports;
+            document.getElementById('desc-sports').innerText = t.descSports; document.getElementById('desc-pbprice').innerText = t.descPbprice;
             document.getElementById('summary-text').querySelector('span').innerText = t.summaryText;
             document.getElementById('details-sports').innerHTML = t.detailsSports;
             document.getElementById('footer-text').innerText = t.footer;
